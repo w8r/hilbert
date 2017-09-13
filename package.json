@@ -1,0 +1,31 @@
+{
+  "name": "hilbert-2d",
+  "version": "0.0.1",
+  "description": "2D Hilbert curve coordinate encoder/decoder",
+  "main": "hilbert.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w8r/hilbert.git"
+  },
+  "keywords": [
+    "hilbert",
+    "curve",
+    "space-filling",
+    "curve",
+    "geohashing",
+    "spatial",
+    "indexing"
+  ],
+  "author": "Alexander Milevski <info@w8r.name>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/w8r/hilbert/issues"
+  },
+  "homepage": "https://github.com/w8r/hilbert#readme",
+  "devDependencies": {
+    "tape": "^4.8.0"
+  }
+}
