@@ -1,4 +1,4 @@
-# Hilbert-2D [![npm version](https://badge.fury.io/js/hilbert-2d.svg)](https://badge.fury.io/js/hilbert-2d) [![CircleCI](https://circleci.com/gh/w8r/hilbert-2d.svg?style=svg)](https://circleci.com/gh/w8r/hilbert-2d)
+# Hilbert-2D [![npm version](https://badge.fury.io/js/hilbert-2d.svg)](https://badge.fury.io/js/hilbert-2d) [![CircleCI](https://circleci.com/gh/w8r/hilbert.svg?style=svg)](https://circleci.com/gh/w8r/hilbert)
 
 2D [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve) coordinate encoder/decoder
 
