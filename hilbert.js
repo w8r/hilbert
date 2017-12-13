@@ -27,29 +27,27 @@
  * @param  {Array<Number>} p    2d-Point
  * @return {Number}
  */
-module.exports.encode = function encode(bits, pt) {
+module.exports.encode = function encode(level, p) {
   var d = 0, tmp;
-  var x = pt[0], y = pt[1];
-  for (var s = (1 << bits) / 2; s > 0; s /= 2) {
-    var rx = 0, ry = 0;
+  var s = (1 << level) / 2;
+  var rx, ry, tmp;
 
-    if ((x & s) > 0) rx = 1;
-    if ((y & s) > 0) ry = 1;
-
+  while (s > 0) {
+    rx = ((p[0] & s) > 0) ? 1 : 0;
+    ry = ((p[1] & s) > 0) ? 1 : 0;
     d += s * s * ((3 * rx) ^ ry);
-
-    // inlining
-    // hilbertRot(s, p, rx, ry)
+    // inline
     if (ry === 0) {
       if (rx === 1) {
-        x = s - 1 - x;
-        y = s - 1 - y;
+          p[0] = s - 1 - p[0];
+          p[1] = s - 1 - p[1];
       }
-      tmp = x;
-      x = y;
-      y = tmp;
+      tmp = p[0];
+      p[0] = p[1];
+      p[1] = tmp;
     }
-    // end inline
+    // inline
+    s = s / 2;
   }
   return d;
 }
@@ -61,30 +59,31 @@ module.exports.encode = function encode(bits, pt) {
  * @param  {Number} d    Distance
  * @return {Array<Number>} [x, y]
  */
-module.exports.decode = function decode(bits, d) {
-  var x = 0, y = 0, tmp;
-  var n = 1 << bits;
-  for (var s = 1; s < n; s *= 2) {
-    var rx = 1 & (d / 2);
-    var ry = 1 & (d ^ rx);
-    // inlining
-    // hilbertRot(s, p, rx, ry)
+module.exports.decode = function decode(level, d) {
+  var n = 1 << level;
+  var s = 1;
+  var p = [0, 0];
+  var rx, ry, tmp;
+  while (s < n) {
+    rx = 1 & (d / 2);
+    ry = 1 & (d ^ rx);
+    // inline
     if (ry === 0) {
       if (rx === 1) {
-        x = s - 1 - x;
-        y = s - 1 - y;
+          p[0] = s - 1 - p[0];
+          p[1] = s - 1 - p[1];
       }
-      tmp = x;
-      x = y;
-      y = tmp;
+      tmp = p[0];
+      p[0] = p[1];
+      p[1] = tmp;
     }
-    // end inline
-
-    x += s * rx;
-    y += s * ry;
+    // inline
+    p[0] += s * rx;
+    p[1] += s * ry;
     d /= 4;
+    s *= 2;
   }
-  return [x, y];
+  return p;
 }
 
 

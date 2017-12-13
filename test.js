@@ -11,8 +11,8 @@ tape.test('Hilbert', (t) => {
   });
 
   t.test('encoding/decoding', (t) => {
-    for (var dim = 16; dim < 23; dim += 2) {
-      for (var i = 0, n = 1000; i < n; i++) {
+    for (var dim = 16; dim < 23; dim++) {
+      for (var i = 0, n = 10; i < n; i += 2) {
         var p   = [(Math.random() * n) | 0, (Math.random() * n) | 0];
         var hb  = encode(dim, p);
         var dec = decode(dim, hb);
